@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title>Student Form</title>
+</h:head>
+<body>
+<h:form id="form1">
+    <h:inputText value="#{ProcessBean.id}" id="id"/><br/>
+    <h:panelGroup id="panel_1">
+        <h:inputText value="#{ProcessBean.name}" id="name"/><br/>
+    </h:panelGroup>
+    <h:panelGroup id="panel_2">
+        <h:inputText value="#{ProcessBean.address}"/>
+        <br/>
+        <p:commandButton process="@form" value="Btm1" id="button1" action="#{ProcessBean.show}"/><!-- Default -->
+        <p:commandButton process="@this" value="Btm2" id="button2" action="#{ProcessBean.show}"/>
+        <p:commandButton process="@this form1:panel_1 @this form1:panel_2" value="Btm3" id="button3" action="#{ProcessBean.show}"/>
+    </h:panelGroup>
+</h:form>
+</body>
+</html>

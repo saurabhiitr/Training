@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title>Student Form</title>
+</h:head>
+<body>
+	<h:form>
+		<h:selectOneMenu value="#{userWizard.user.state}">
+			<f:selectItems value="#{userWizard.states}" />
+			<f:ajax render=":filter" />
+		</h:selectOneMenu>
+	</h:form>
+	<h:panelGroup id="filter">
+		<h:panelGroup rendered="#{not empty userWizard.user.state}">
+			<h:form rendered="#{not counties.accepted}">
+				<h:inputText value="#{counties.report}" />
+				<h:commandButton value="OK" action="#{counties.viewReport}">
+					<f:ajax execute="@form" render=":filter" />
+				</h:commandButton>
+			</h:form>
+			<h:form rendered="#{counties.accepted}">
+				<ui:include src="form.xhtml" />
+			</h:form>
+		</h:panelGroup>
+	</h:panelGroup>
+</body>
+</html>

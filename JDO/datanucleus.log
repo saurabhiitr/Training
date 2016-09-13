@@ -1,0 +1,4 @@
+16:35:31,729 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer : Using ClassEnhancer "ASM" for API "JDO"
+16:35:31,915 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer (version 3.0.1) : Enhancement of classes
+16:35:32,125 (main) INFO  [DataNucleus.Enhancer] - Writing class file "E:\Training\JDO\target\classes\com\tbitsglobal\Employee.class" with enhanced definition
+16:35:32,131 (main) INFO  [DataNucleus.Enhancer] - DataNucleus Enhancer completed with success for 1 classes. Timings : input=121 ms, enhance=93 ms, total=214 ms. Consult the log for full details

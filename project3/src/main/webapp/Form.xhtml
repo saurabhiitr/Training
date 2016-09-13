@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<title>Student Form</title>
+</h:head>
+<body>
+	<h:form >
+		<p:growl id="growl" sticky="true" showDetail="true" />
+
+		<p:wizard flowListener="#{userWizard.onFlowProcess}">
+			<p:tab id="personal" title="Personal">
+				<p:panel header="Personal Details">
+					<p:messages />
+					<h:panelGrid columns="2" columnClasses="label, value">
+						<h:outputText value="Firstname: *" />
+						<p:inputText value="#{userWizard.user.firstname}" required="true"
+							label="Firstname" />
+
+						<h:outputText value="Lastname: *" />
+						<p:inputText value="#{userWizard.user.lastname}" required="true"
+							label="Lastname" />
+
+						<p:outputLabel for="radio" value="Gender : " />
+						<p:selectOneRadio id="radio" value="#{userWizard.usrData.gender}">
+							<f:selectItem itemLabel="Male" itemValue="M" />
+							<f:selectItem itemLabel="Female" itemValue="F" />
+						</p:selectOneRadio>
+
+						<p:outputLabel for="german" value="Date Of Birth:" />
+						<p:calendar id="german" value="#{userWizard.usrData.dob}" locale="de"
+							navigator="true" pattern="dd/MM/yyyy" required="true" />
+
+						<h:outputText value="Skip to last: " />
+						<h:selectBooleanCheckbox value="#{userWizard.skip}" />
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+			<p:tab id="address" title="Address">
+				<p:panel header="Address Details">
+					<p:messages />
+					<h:panelGrid columns="2" columnClasses="label, value">
+						<h:outputText value="Street: " />
+						<p:inputText value="#{userWizard.usrData.street}" />
+
+						<h:outputText value="Postal Code: " />
+						<p:inputText value="#{userWizard.usrData.postalCode}" />
+
+						<p:outputLabel for="State" value="State: " />
+						<p:selectOneMenu id="State" value="#{userWizard.usrData.state}">
+							<p:ajax listener="#{userWizard.onStateChange}" update="city" />
+							<f:selectItem itemLabel="Select State" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{userWizard.states}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="city" value="City: " />
+						<p:selectOneMenu id="city" value="#{userWizard.usrData.city}">
+							<f:selectItem itemLabel="Select City" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{userWizard.cities}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Skip to last: " />
+						<h:selectBooleanCheckbox value="#{userWizard.skip}" />
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+			<p:tab id="contact" title="Contact">
+				<p:panel header="Contact Information">
+					<p:messages />
+					<h:panelGrid columns="2" columnClasses="label, value">
+						<h:outputText value="Email: *" />
+						<p:inputText value="#{userWizard.usrData.email}" required="true"
+							label="Email" />
+
+						<h:outputText value="Phone: " />
+						<p:inputText value="#{userWizard.usrData.phone}" />
+
+						<h:outputText value="Additional Info: " />
+						<p:editor id="editor" widgetVar="editorWidget"
+							value="#{userWizard.usrData.text}" width="600" />
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+
+			<p:tab id="confirm" title="Confirmation">
+				<p:panel header="Confirmation">
+					<h:panelGrid id="confirmation" columns="3"
+						columnClasses="grid,grid,grid">
+						<h:panelGrid columns="2" columnClasses="label, value">
+							<h:outputText value="Firstname: " />
+							<h:outputText value="#{userWizard.user.firstname}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Lastname: " />
+							<h:outputText value="#{userWizard.user.lastname}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Gender: " />
+							<h:outputText value="#{userWizard.usrData.gender}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Date Of Birth: " />
+							<h:outputText value="#{userWizard.usrData.dob}"
+								styleClass="outputLabel" />
+
+			
+						</h:panelGrid>
+
+						<h:panelGrid columns="2" columnClasses="label, value">
+							<h:outputText value="Street: " />
+							<h:outputText value="#{userWizard.usrData.street}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Postal: " />
+							<h:outputText value="#{userWizard.usrData.postalCode}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="City: " />
+							<h:outputText value="#{userWizard.usrData.city}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="City: " />
+							<h:outputText value="#{userWizard.usrData.state}"
+								styleClass="outputLabel" />
+						</h:panelGrid>
+
+						<h:panelGrid columns="2" columnClasses="label, value"
+							cellpadding="5" style="margin-left:30px">
+							<h:outputText value="Email: " />
+							<h:outputText value="#{userWizard.usrData.email}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Phone " />
+							<h:outputText value="#{userWizard.usrData.phone}"
+								styleClass="outputLabel" />
+
+							<h:outputText value="Info: " />
+							<h:outputText value="#{userWizard.usrData.text}"
+								styleClass="outputLabel" />
+
+						</h:panelGrid>
+					</h:panelGrid>
+
+					<p:commandButton value="Submit" actionListener="#{userWizard.save}"
+						update="growl" render=":filter" />
+
+				</p:panel>
+			</p:tab>
+		</p:wizard>
+	</h:form>
+
+	<h:panelGroup id="filter" rendered="#{userWizard.show}">
+		<h:form id="form_2">
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:dataTable id="Users" var="u" value="#{user.messages}"
+				paginator="true" rows="3"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="3,5,10" editable="true"
+				style="margin-bottom:20px">
+				<f:facet name="header">
+           Row Editing
+       </f:facet>
+
+				<p:ajax event="rowEdit" listener="#{userWizard.onRowEdit}"
+					update=":form_2:msgs,Users" />
+				<p:ajax event="rowEditCancel" listener="#{userWizard.onRowCancel}"
+					update=":form_2:msgs" />
+
+				<p:column headerText="Id">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{u.id}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="modelInput" value="#{u.id}" style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="FirstName">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{u.firstname}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{u.firstname}" style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Lastname">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{u.lastname}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{u.lastname}" style="width:100%" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:32px">
+					<p:rowEditor />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</h:panelGroup>
+</body>
+</html>
