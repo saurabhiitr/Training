@@ -2,17 +2,25 @@ package org.tbitsglobal;
 
 import java.io.Serializable;
 
+import javax.jdo.annotations.Column;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
+@PersistenceCapable(detachable = "true",table="user")
 public class User implements Serializable {
  
 	private static final long serialVersionUID = 1L;
 	
+	@Persistent(primaryKey = "true")
 	private long id;
 
+	@Column(jdbcType = "VARCHAR", length = 45)
 	private String firstname;
-     
+ 
+	@Column(jdbcType = "VARCHAR", length = 45)
     private String lastname;
 	
 	public User(){}

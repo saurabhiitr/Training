@@ -8,6 +8,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.configuration.ConfigurationException;
+import org.tbitsglobal.Persistance.Test;
+
 
 @Path("/UserService")
 public class UserService {
@@ -18,7 +21,13 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public static Response storeUser(User user)
     {
-		 UserDao.storeUser(user);
+		try {
+			Test.storeClient(user);
+		} catch (ConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		 UserDao.storeUser(user);
 		return Response.status(Response.Status.CREATED).entity(user).build();
 //		return Response.status(200).build();
 	}
