@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+	<title><ui:insert name="title">Default title</ui:insert></title>
+</h:head>
+
+<body>
+
+	<p:layout id="outerlayout" fullPage="true">
+
+		<p:layoutUnit id="outer_west" position="west" size="200"
+			header="All Active BA Users" resizable="true">
+			<h:form>
+				<p:selectOneListbox id="advanced" value="#{selectedUser.user}" filter="true"
+					filterMatchMode="contains" scrollHeight="100" style="width: 97%;">
+					<f:selectItems value="#{selectedUser.userList}" />
+					  <f:ajax event="change"   render="username" ></f:ajax>
+				</p:selectOneListbox>
+			
+			<br></br>
+			<br></br>
+
+			<h:outputLabel for="username" value="Selected User :" />
+			<h:inputText id="username" value="#{selectedUser.user}"
+				style="width: 97%;" />
+
+			 <p:commandButton value="Non-Ajax Submit" id="nonAjax" actionListener="#{selectedUser.save}" ajax="false" />
+ 
+				
+			</h:form>
+		</p:layoutUnit>
+
+
+
+		<p:layoutUnit id="outer_center" position="center" style="width:10%;">
+			<p:dataTable var="field"
+							value="#{selectedUser.user2values}"
+							style="margin-bottom:20px ; ">
+							<f:facet name="header">
+           						 Permissions
+        					</f:facet>
+							<p:column headerText="Field Name" sortBy="#{field}">
+								<h:outputText value="#{field}" />
+							</p:column>
+
+	
+						</p:dataTable>
+					
+		</p:layoutUnit>
+
+	</p:layout>
+</body>
+
+</html>

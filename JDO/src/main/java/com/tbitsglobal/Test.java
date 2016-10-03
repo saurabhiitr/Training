@@ -20,13 +20,13 @@ public class Test {
 	 private static Logger logger = LoggerFactory.getLogger(Test.class);
 	private static PersistenceManagerFactory pmf=null;
 
-    public static Employee storeClient(PersistenceManager pm, Employee client) {
+    public static User storeClient(PersistenceManager pm, User client) {
     	return pm.makePersistent(client);
     }
 
 
-    public static Employee storeClient(Employee client) throws org.apache.commons.configuration.ConfigurationException {
-    	Employee newClient = null;
+    public static User storeClient(User client) throws org.apache.commons.configuration.ConfigurationException {
+    	User newClient = null;
         PersistenceManager pm = getPersistenceManager();
         Transaction tx = pm.currentTransaction();
         try {
@@ -78,7 +78,7 @@ public class Test {
      public static void main(String[] args) throws org.apache.commons.configuration.ConfigurationException {
     	 try{
 //    		 Employee cl= new Employee();
-    		 Employee cl= new Employee(4,"saurabh");
+    		 User cl= new User(4,"saurabh");
     		 storeClient(cl);
     	 }catch(Exception e){
     		 System.out.println("error"+e);

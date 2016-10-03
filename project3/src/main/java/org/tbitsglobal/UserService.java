@@ -24,7 +24,6 @@ public class UserService {
 		try {
 			Test.storeClient(user);
 		} catch (ConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 //		 UserDao.storeUser(user);

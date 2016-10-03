@@ -12,7 +12,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 @PersistenceCapable(detachable = "true",table="employee")
 //@Index(name = "client_id_idx", members = {"empId"})
-public class Employee implements Serializable{
+public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -23,7 +23,7 @@ public class Employee implements Serializable{
 //    @Unique(name = "unique_clientname")
 	private String empName;
 
-	public Employee(){}
+	public User(){}
 	
 	@Override
 	public String toString() {
@@ -46,7 +46,7 @@ public class Employee implements Serializable{
 		this.empName = empName;
 	}
 
-	public Employee(long empId, String empName) {
+	public User(long empId, String empName) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
