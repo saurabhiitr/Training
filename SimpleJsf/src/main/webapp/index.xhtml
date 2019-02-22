@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+	<title><ui:insert name="title">Default title</ui:insert></title>
+</h:head>
+
+<body>
+
+			
+<h:form id="form" enctype="multipart/form-data">
+	<p:ajaxStatus style="display:block;margin-bottom:2em;height:24px;">
+    <f:facet name="success">
+        <h:outputText value="Status: StandBy" />
+    </f:facet>
+     
+    <f:facet name="start">
+         <h:outputText value="Status: Start" />
+    </f:facet>
+    
+    <f:facet name="error">
+         <h:outputText value="Status: error" />
+    </f:facet>
+ 
+    <f:facet name="complete">
+        <h:outputText value="Status: Completed" />
+    </f:facet>
+</p:ajaxStatus>
+
+	<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+
+	<p:commandButton id="cmdbutton" value="button" actionListener="#{bean.buttonListener}" update="form:tabView" ></p:commandButton>
+	    <p:tabView id="tabView" dynamic="true" cache="false" binding="#{bean.tabView}" onTabClose="PF('tabViewVar').select(0)" widgetVar="tabViewVar" >
+        
+        <p:ajax event="tabClose" listener="#{bean.onTabClose}"
+		partialSubmit="true" immediate="true" />
+		
+        <p:tab title="Godfather Part I">
+            <h:panelGrid columns="2" cellpadding="10">
+                <h:outputText
+                    value="The story begins as Don Vito Corleone..." />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Godfather Part II">
+            <h:panelGrid columns="2" cellpadding="10">
+                <h:outputText value="Francis Ford Coppola's legendary..." />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Godfather Part III">
+            <h:panelGrid columns="2" cellpadding="10">
+                <h:outputText value="After a break of more than 15 years..." />
+            </h:panelGrid>
+        </p:tab>
+        <c:forEach items="#{bean.dynamicTab}" var="tab">
+				<p:tab id="#{tab.id}" binding="#{tab}"></p:tab>
+		</c:forEach>
+    </p:tabView>
+    </h:form>
+</body>
+
+</html>

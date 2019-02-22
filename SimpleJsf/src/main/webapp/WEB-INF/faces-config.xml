@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+	version="2.0">
+
+
+	<application>
+
+	</application>
+
+
+	<render-kit>
+		<renderer>
+			<component-family>javax.faces.Input</component-family>
+			<renderer-type>javax.faces.File</renderer-type>
+			<renderer-class>com.bean.MultipleFileRenderer</renderer-class>
+		</renderer>
+	</render-kit>
+	<lifecycle>
+		<phase-listener>com.bean.PerformancePhaseListener</phase-listener>
+	</lifecycle>
+
+
+
+
+
+</faces-config>
