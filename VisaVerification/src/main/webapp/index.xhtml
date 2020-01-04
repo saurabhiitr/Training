@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+	<title>Visa Verification</title>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/resources/css/style.css" />
+</h:head>
+<h:body>
+	<div class="header">
+		<a href="#default" class="logo">Visa Verification</a>
+		<div class="header-right">
+			<a class="active" href="#home">Home</a> <a href="#contact">Contact</a>
+			<a href="#about">About</a>
+		</div>
+	</div>
+	<p:panelGrid columns="3" layout="grid"
+		columnClasses="west-layout,center-layout,east-layout">
+		<h:form id="form">
+			<p:growl id="messages" showDetail="true" />
+			<p:tree value="#{projectTree.root}" var="node" filterBy="#{node}"
+				selectionMode="single" selection="#{projectTree.selectedNode}"
+				style="height:550px;background-color: aliceblue;overflow-y : scroll;">
+				<p:ajax event="select" update=":form:messages form2"
+					listener="#{projectTree.onNodeSelect}" />
+				<p:treeNode expandedIcon="ui-icon-folder-open"
+					collapsedIcon="ui-icon-folder-collapsed">
+					<h:outputText value="#{node}" />
+				</p:treeNode>
+				<p:treeNode type="document" icon="ui-icon-document">
+					<h:outputText value="#{node}" />
+				</p:treeNode>
+				<p:treeNode type="picture" icon="ui-icon-image">
+					<h:outputText value="#{node}" />
+				</p:treeNode>
+				<p:treeNode type="mp3" icon="ui-icon-video">
+					<h:outputText value="#{node}" />
+				</p:treeNode>
+			</p:tree>
+		</h:form>
+		<h:form id="form2">
+			<div style="height: calc(100vh - 100px); width: 100%">
+				<p:galleria value="#{projectTree.images}" var="image"
+					panelWidth="500" panelHeight="313" showCaption="false" autoPlay="false">
+					<p:graphicImage value="/resources/images/#{image}" style="width: 100%; height :100%;"
+						alt="Image Description for #{image}" title="#{image}" />
+				</p:galleria>
+				
+				<p:graphicImage value="#{graphicImageView.chart}" height="50%"
+					width="100%" />
+			</div>
+		</h:form>
+		<h:form>
+			<h:commandButton value="submit"></h:commandButton>
+		</h:form>
+	</p:panelGrid>
+</h:body>
+</html>
